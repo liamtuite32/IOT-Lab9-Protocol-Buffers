@@ -1,1 +1,13 @@
+syntax = "proto2";
 
+message Time {
+    required int32 hour = 1;
+    required int32 minute = 2;
+    required int32 second = 3;
+}
+
+message TemperatureReading {
+    required float temperature = 1;
+    required string publisher_id = 2;
+    required Time timestamp = 3;
+}
