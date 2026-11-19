@@ -2,7 +2,7 @@
 
 - Liam Tuite - c21447352
 - Oisin Kiely - c21501436
-- Providence Obiozor - c20499732
+
 
 ## Project Description
 A simple IoT temperature monitoring system using two Raspberry Pi Pico W boards communicating through MQTT. The system monitors temperature and uses an LED to indicate when the temperature reaches a specified threshold.
