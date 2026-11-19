@@ -1,12 +1,12 @@
 # Lab 8: Subscriber
 # Liam Tuite - c21447352
 # Oisin Kiely - c21501436
-# Providence Obiozor - c20499732
 
 import network
 import machine
 import time
 from umqtt.simple import MQTTClient
+from temperature_upb2 import TemperatureReading
 
 # WiFi and MQTT Broker Configuration - Fill with correct details
 WIFI_NAME= "WIFI"
@@ -17,8 +17,15 @@ led = machine.Pin(15, machine.Pin.OUT)
 led.value(0) 
 
 def received_message(topic, message):
-    temperature = float(message.decode())
+    reading = TemperatureReading.decode(message)
+
+    temperature = reading.temperature
+
     print("Received temperature:", temperature)
+    print("Publisher ID:", reading.publisher_id)
+    print("Time:", reading.timestamp.hour,
+          reading.timestamp.minute,
+          reading.timestamp.second)
 
     if temperature >= 25:
         led.value(1)
