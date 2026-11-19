@@ -1,12 +1,12 @@
 # Lab 8: Publisher
 # Liam Tuite - c21447352
 # Oisin Kiely - c21501436
-# Providence Obiozor - c20499732
 
 import network
 import machine
 import time
 from umqtt.simple import MQTTClient
+from temperature_upb2 import Time, TemperatureReading
 
 # WiFi and MQTT Broker Configuration - Fill with correct details
 WIFI_NAME= "WIFI"
@@ -40,6 +40,19 @@ print("Connected to MQTT Broker")
 # Publish temperature readings to the MQTT topic "temperature/pico" every second
 while True:
     temperature = read_temperature()
-    message = str(round(temperature, 2))
+
+    current_time = time.localtime()
+
+    timestamp = Time()
+    timestamp.hour = current_time[3]
+    timestamp.minute = current_time[4]
+    timestamp.second = current_time[5]
+
+    message = TemperatureReading()
+    message.temperature = round(temperature, 2)
+    message.publisher_id = "publisher"
+    message.timestamp = timestamp
+
     client.publish(b"temperature/pico", message.encode())
+
     time.sleep(1)
