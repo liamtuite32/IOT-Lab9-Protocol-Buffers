@@ -1,4 +1,4 @@
-# Lab 8: Publisher
+# Lab 9: Publisher
 # Liam Tuite - c21447352
 # Oisin Kiely - c21501436
 
