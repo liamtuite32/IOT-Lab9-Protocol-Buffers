@@ -1,4 +1,4 @@
-# Lab 8: Subscriber
+# Lab 9: Subscriber
 # Liam Tuite - c21447352
 # Oisin Kiely - c21501436
 
@@ -9,9 +9,9 @@ from umqtt.simple import MQTTClient
 from temperature_upb2 import TemperatureReading
 
 # WiFi and MQTT Broker Configuration - Fill with correct details
-WIFI_NAME= "WIFI"
-WIFI_PASSWORD= "PASSWORD"
-BROKER_IP = "IP_ADDRESS"
+WIFI_NAME= "LIAM"
+WIFI_PASSWORD= "IOT_LAB6967"
+BROKER_IP = "10.151.34.191"
 
 led = machine.Pin(15, machine.Pin.OUT)  
 led.value(0) 
@@ -44,7 +44,7 @@ while not wlan.isconnected():
 
 print("Connected to WiFi. IP Address:", wlan.ifconfig()[0])
 
-client = MQTTClient("subscriber", BROKER_IP)
+client = MQTTClient("subscriber", BROKER_IP, port = 8080)
 client.set_callback(received_message)
 client.connect()
 client.subscribe(b"temperature/pico")
@@ -54,3 +54,4 @@ print("Subscribed to topic: temperature/pico")
 while True:
     client.check_msg()  
     time.sleep(0.1)  
+
