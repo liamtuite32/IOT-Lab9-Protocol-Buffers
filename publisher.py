@@ -34,7 +34,7 @@ while not wlan.isconnected():
 print("Connected to WiFi")
 print("IP Address:", wlan.ifconfig()[0])
 # Connect to MQTT Broker
-client = MQTTClient("publisher", BROKER_IP)
+client = MQTTClient("publisher", BROKER_IP, port=8080)
 client.connect()
 print("Connected to MQTT Broker")
 # Publish temperature readings to the MQTT topic "temperature/pico" every second
@@ -53,6 +53,6 @@ while True:
     message.publisher_id = "publisher"
     message.timestamp = timestamp
 
-    client.publish(b"temperature/pico", message.encode())
+    client.publish(b"temp/pico", message.encode())
 
     time.sleep(1)
