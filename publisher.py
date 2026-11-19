@@ -37,7 +37,7 @@ print("IP Address:", wlan.ifconfig()[0])
 client = MQTTClient("publisher", BROKER_IP, port=8080)
 client.connect()
 print("Connected to MQTT Broker")
-# Publish temperature readings to the MQTT topic "temperature/pico" every second
+# Publish temperature readings to the MQTT topic "temp/pico" every second
 while True:
     temperature = read_temperature()
 
